@@ -5,13 +5,16 @@ var path = require("path")
 var MongoClient = require('mongodb').MongoClient
 var url = "mongodb://projectclout.com:27017/mydb";
 
+app = express.Router()
+
+var http = require('http').createServer(app)
 const { dirname } = require('path')
+
 
 MongoClient.connect(url, function(err,db){
     if (err) throw err;
     dbo = db.db("smallProjects");
 
-    app = express()
 
     app.use(bodyParser.urlencoded({
         extended : true
@@ -67,6 +70,8 @@ MongoClient.connect(url, function(err,db){
         })
         
     })
-    app.listen(8080)
+    
 
 })
+
+module.exports = { app : app }
